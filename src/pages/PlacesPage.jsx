@@ -19,9 +19,11 @@ export const PlacesPage = () => {
     return (
         <div className="container">
             <h2>Places Page</h2>
-            {data.map(place => {
-                return <div>{place.city}</div>
-            })}
+            <ul>
+                {data.map(place => {
+                    return <li key={place.id}>{place.city}</li>
+                })}
+            </ul>
         </div>
     )
 
