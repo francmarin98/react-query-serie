@@ -1,45 +1,49 @@
-import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
+import {BrowserRouter, NavLink, Route, Switch} from "react-router-dom";
+import {HomePage, PlacesPage, RQPlacesPage} from "./pages";
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+    return (
+        <BrowserRouter>
+            <div>
+                <nav>
+                    <ul>
+                        <li>
+                            <NavLink to="/">
+                                Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/places-page">
+                                Traditional Places Page
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/rq-places-page">
+                                RQ Places Page
+                            </NavLink>
+                        </li>
+                    </ul>
+                </nav>
+
+                {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+                <Switch>
+                    <Route path="/places-page">
+                        <PlacesPage/>
+                    </Route>
+                    <Route path="/rq-places-page">
+                        <RQPlacesPage/>
+                    </Route>
+                    <Route path="/">
+                        <HomePage/>
+                    </Route>
+                </Switch>
+            </div>
+        </BrowserRouter>
+    )
 }
 
 export default App
