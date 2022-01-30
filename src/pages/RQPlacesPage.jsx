@@ -5,10 +5,14 @@ const fetchPlaces = () => axios.get('http://localhost:4000/places');
 
 export const RQPlacesPage = () => {
 
-    const {isLoading, data} = useQuery('places-query', fetchPlaces);
+    const {isLoading, data, error, isError} = useQuery('places-query', fetchPlaces);
 
     if (isLoading) {
         return <h2>Loading...</h2>
+    }
+
+    if(isError){
+        return <h2>{error.message}</h2>
     }
 
     return (
