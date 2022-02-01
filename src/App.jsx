@@ -1,6 +1,7 @@
 import './App.css'
 import {BrowserRouter, NavLink, Route, Switch} from "react-router-dom";
 import {HomePage, PlacesPage, RQPlacesPage} from "./pages";
+import {Toaster} from "react-hot-toast";
 
 
 function App() {
@@ -42,6 +43,10 @@ function App() {
                     </Route>
                 </Switch>
             </div>
+            <Toaster
+                position="bottom-right"
+                reverseOrder={true}
+            />
         </BrowserRouter>
     )
 }

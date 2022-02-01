@@ -1,5 +1,6 @@
 import {useQuery} from "react-query";
 import axios from "axios";
+import {onError, onSuccess} from "../utils/toast-notification";
 
 const fetchPlaces = () => axios.get('http://localhost:4000/places');
 
@@ -12,10 +13,18 @@ export const RQPlacesPage = () => {
         // refetchOnWindowFocus: true,
         // refetchInterval: 500000 Nos permite definir el tiempo en que queremos que se realice la peticion automáticamente
         // refetchIntervalInBackground: true Nos permite decirle a React Query que así se cambie de página siempre se ejecute la petición
-        enabled: false
+        // enabled: false
+        onSuccess,
+        onError,
+        select: (data) => {
+            return data.data.map((place) => ({
+                city: place.city,
+                id: place.id
+            }));
+        }
     });
 
-    console.log({isLoading, isFetching});
+    console.log({isLoading, isFetching, data});
 
     if (isLoading || isFetching) {
         return <h2>Loading...</h2>
@@ -29,7 +38,10 @@ export const RQPlacesPage = () => {
         <div className="container">
             <h2>RQ Places Page</h2>
             <ul>
-                {data?.data.map(place => {
+                {/*                {data?.data.map(place => {
+                    return <li key={place.id}>{place.city}</li>
+                })}*/}
+                {data.map(place => {
                     return <li key={place.id}>{place.city}</li>
                 })}
             </ul>
